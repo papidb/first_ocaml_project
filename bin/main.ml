@@ -92,9 +92,7 @@ print_list one_to_ten
 
 let new_float = float_of_int 1 +. 2.45 ;;
 
-print_float new_float ;;
-
-print_newline
+print_float new_float
 
 (* lists *)
 
@@ -112,9 +110,33 @@ print_newline
 
    a list of list of intergers *)
 
+let poly_list = [1; 2; 4; 5; 2]
+
 let rec sum_of_list u =
   match u with
   | [] -> 0
   | x :: u -> x + sum_of_list u
 
-let () = print_int (sum_of_list [1; 2; 4; 5; 2])
+let () = print_int (sum_of_list poly_list) ;;
+
+print_newline ()
+
+(*
+length_of_list is a polymorphic function
+this more or less means it operates on any kind of list
+a list of ints, strings, etc. 
+
+Why? 
+the match [] has no type, so it can be of any type
+the match _ :: b we don't inspect the type at the head of the list
+Since both patterns must be of the same type, 
+the typing algorithm infers the 'a list -> int type
+*)
+let rec length_of_list u =
+  match u with
+  | [] -> 0
+  | _ :: b -> 1 + length_of_list b
+
+let () = print_int (length_of_list poly_list) ;;
+
+print_newline ()
