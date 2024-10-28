@@ -140,3 +140,19 @@ let rec length_of_list u =
 let () = print_int (length_of_list poly_list) ;;
 
 print_newline ()
+
+let rec map_list f u =
+  match u with
+  | [] -> []
+  | x :: u -> f x :: map_list f u
+;;
+
+print_newline () ;;
+
+map_list (fun x -> print_int x) poly_list ;;
+
+print_newline () ;;
+
+print_list (map_list square poly_list)
+
+(* print_list hi *)
