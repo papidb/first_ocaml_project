@@ -155,4 +155,20 @@ print_newline () ;;
 
 print_list (map_list square poly_list)
 
-(* print_list hi *)
+(*
+   fun i ->
+      match i with
+      | 0 -> 1
+      | _ -> 0
+*)
+
+let snd p =
+  match p with
+  | _, y -> y
+;;
+
+(*
+   The type of tuples is written using * between the components' types.
+   The type of snd is 'a * 'b -> 'b
+*)
+print_endline (snd (42, "apple"));;
