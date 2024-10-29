@@ -328,3 +328,17 @@ match confirm_eligibility 1001 with
 | Error (Too_Old n) -> print_endline (string_of_int n ^ " is too old")
 | Error (Too_Young n) -> print_endline (string_of_int n ^ " is too young")
 | Ok _ -> print_endline "right age"
+
+(* let rec ack m n =
+   if m = 0 then n + 1
+   else if m > 0 && n = 0 then ack (m - 1) 1
+   else ack (m - 1) (ack m n - 1) *)
+
+let rec ack = function
+  | 0, n -> n + 1
+  | m, 0 -> ack (m - 1, 1)
+  | m, n -> ack (m - 1, ack (m, n - 1))
+
+let ack_result = ack (3, 5)
+
+let () = print_endline (string_of_int ack_result)
