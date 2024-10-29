@@ -291,3 +291,28 @@ let is_teenager person =
 let () = print_endline (string_of_bool (is_teenager daniel))
 
 let () = print_endline (cat daniel.first_name daniel.username)
+
+(* exceptions *)
+
+let id_42 n = if n != 42 then raise (Failure "sorry") else n
+
+let basline_int =
+  try id_42 10 with
+  | Failure _ -> 0
+;;
+
+print_endline (string_of_int basline_int)
+
+type module_error = Not42 of string
+
+(* type http_response = Data of string | Error_code of int *)
+
+let id_42_res n = if n <> 42 then Error (Not42 "Not 42") else Ok n ;;
+
+match id_42_res 109 with
+| Ok n -> print_endline (string_of_int n)
+| Error err -> (
+  match err with
+  | Not42 _ -> print_endline "failed" )
+
+(* print_endline (string_of_int (id_42_res 42)) *)
