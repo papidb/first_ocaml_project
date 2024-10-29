@@ -257,4 +257,21 @@ let () = print_endline (string_of_int (http_status_code dummy_data))
 
 let () = print_endline (string_of_int (http_status_code error_code_not_found))
 
-(* let omo = ( :: ) (1, ( :: ) (2, ( :: ) (3, []))) *)
+(* let weird_list = ( :: ) (1, ( :: ) (2, ( :: ) (3, []))) *)
+
+type rectitude = Evil | R_Neutral | Good
+
+(* directly pattern match on a type (* this returns a function that takes rectitude and returns string *) *)
+let rectitude_to_french = function
+  | Evil -> "Mauvais"
+  | R_Neutral -> "Neutre"
+  | Good -> "Bon"
+
+let () = print_endline (rectitude_to_french Evil)
+
+let () = print_endline (rectitude_to_french R_Neutral)
+
+let _ =
+  List.iter (fun rect -> print_endline (rectitude_to_french rect)) [Evil; Good]
+
+let _ = "hi"
