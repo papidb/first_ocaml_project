@@ -171,4 +171,46 @@ let snd p =
    The type of tuples is written using * between the components' types.
    The type of snd is 'a * 'b -> 'b
 *)
-print_endline (snd (42, "apple"));;
+print_endline (snd (42, "apple"))
+
+(*
+   Pattern Matching
+   Pattern Matching in OCaml
+   Pattern matching in OCaml is much more versatile than switch statements.
+   Rather than just matching simple values, OCaml's pattern matching can decompose complex data structures (like lists, tuples, option types, and custom types) directly.
+   It allows for conditions that depend on the shape or structure of the data, not just its value.
+*)
+
+let describe_list lst =
+  match lst with
+  | [] -> "The list is empty."
+  | [x] -> "The list has one element: " ^ string_of_int x
+  | [x; y] ->
+      "The list has two elements: " ^ string_of_int x ^ " and "
+      ^ string_of_int y
+  | _ :: _ :: _ -> "The list has more than two elements."
+;;
+
+print_endline (describe_list [1]) ;;
+
+print_endline (describe_list [1; 2]) ;;
+
+print_endline (describe_list [1; 2; 3]) ;;
+
+print_endline (describe_list [1; 2; 3; 4])
+
+(* variant types *)
+(* Like pattern matching generalises switch statements, variant types generalise enumerated and union types. *)
+
+(* primary_color is an example of an enumerated type (fancy for enum) *)
+type primary_color = Red | Green | Blue
+
+let primary_color_list = [Red; Blue; Green] ;;
+
+map_list
+  (fun color ->
+    match color with
+    | Red -> print_string "red"
+    | Green -> print_string "green"
+    | Blue -> print_string "blue" )
+  primary_color_list
