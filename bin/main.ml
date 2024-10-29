@@ -275,3 +275,19 @@ let _ =
   List.iter (fun rect -> print_endline (rectitude_to_french rect)) [Evil; Good]
 
 let _ = "hi"
+
+type person = {first_name: string; username: string; age: int}
+
+(*
+   I don't need to define the type for daniel
+   the complier can guess what type daniel is
+*)
+let daniel = {first_name= "Daniel"; username= "daniel"; age= 20}
+
+let is_teenager person =
+  match person with
+  | {age= x; _} -> 13 <= x && x <= 19
+
+let () = print_endline (string_of_bool (is_teenager daniel))
+
+let () = print_endline (cat daniel.first_name daniel.username)
