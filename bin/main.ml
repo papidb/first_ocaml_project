@@ -210,7 +210,7 @@ let primary_color_list = [Red; Blue; Green] ;;
 map_list
   (fun color ->
     match color with
-    | Red -> print_string "red"
-    | Green -> print_string "green"
-    | Blue -> print_string "blue" )
+    | Red -> print_string "red" ; print_string " "
+    | Green -> print_string "green" ; print_string " "
+    | Blue -> print_string "blue" ; print_string " " )
   primary_color_list
