@@ -311,8 +311,20 @@ let id_42_res n = if n <> 42 then Error (Not42 "Not 42") else Ok n ;;
 
 match id_42_res 109 with
 | Ok n -> print_endline (string_of_int n)
-| Error err -> (
-  match err with
-  | Not42 _ -> print_endline "failed" )
+| Error (Not42 _) -> print_endline "failed"
+(* | Error err -> (
+   match err with
+   | Not42 _ -> print_endline "failed" ) *)
 
-(* print_endline (string_of_int (id_42_res 42)) *)
+type operations_error = Too_Young of int | Too_Old of int
+
+let confirm_eligibility n =
+  if n < 18 then Error (Too_Young n)
+  else if n > 100 then Error (Too_Old n)
+  else Ok n
+;;
+
+match confirm_eligibility 1001 with
+| Error (Too_Old n) -> print_endline (string_of_int n ^ " is too old")
+| Error (Too_Young n) -> print_endline (string_of_int n ^ " is too young")
+| Ok _ -> print_endline "right age"
