@@ -214,3 +214,47 @@ map_list
     | Green -> print_string "green" ; print_string " "
     | Blue -> print_string "blue" ; print_string " " )
   primary_color_list
+
+(* union type *)
+
+(* the capitalised identifiers are called constructors. They allow the creation of variant values *)
+type http_response = Data of string | Error_code of int
+
+let dummy_data =
+  Data
+    "<!DOCTYPE html>\n\
+     <html lang=\"en\">\n\
+    \  <head>\n\
+    \    <meta charset=\"utf-8\">\n\
+    \    <title>Dummy</title>\n\
+    \  </head>\n\
+    \  <body>\n\
+    \    Dummy Page\n\
+    \  </body>\n\
+     </html>"
+
+let error_code_not_found = Error_code 404
+
+type _page_range = All | Current | Range of int * int
+
+let colour_to_rgb colour =
+  match colour with
+  | Red -> (0xff, 0, 0)
+  | Green -> (0, 0xff, 0)
+  | Blue -> (0, 0, 0xff)
+;;
+
+colour_to_rgb Red ;;
+
+print_newline ()
+
+let http_status_code response =
+  match response with
+  | Data _ -> 200
+  | Error_code code -> code
+
+let () = print_endline (string_of_int (http_status_code dummy_data))
+
+let () = print_endline (string_of_int (http_status_code error_code_not_found))
+
+(* let omo = ( :: ) (1, ( :: ) (2, ( :: ) (3, []))) *)
